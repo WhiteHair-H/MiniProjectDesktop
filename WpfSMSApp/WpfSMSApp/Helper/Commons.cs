@@ -17,9 +17,5 @@ namespace WpfSMSApp
         // 로그인한 유저 정보
         public static User LOGINED_USER;
 
-
-
-
-
     }
 }
