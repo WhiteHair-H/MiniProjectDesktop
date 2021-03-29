@@ -9,8 +9,14 @@
     xmlns:local="clr-namespace:WpfSMSApp"
     mc:Ignorable="d"
     Title="Stock Management System" Height="700" Width="1200" 
-    ContentRendered="MetroWindow_ContentRendered"
-    WindowStartupLocation="CenterScreen" Icon="Resources/stock.png">
+    ContentRendered="MetroWindow_ContentRendered" Activated="MetroWindow_Activated"
+    WindowStartupLocation="CenterScreen" 
+    Icon="Resources/stock.png">
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button x:Name="BtnLoginedId" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
     
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="70">
@@ -119,7 +125,7 @@
                     Grid.Column="6"
                     Content="계정" FontSize="14" 
                     Background="CornflowerBlue"
-                    Foreground="White" Margin="5,10">
+                    Foreground="White" Margin="5,10" Click="BtnAccount_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -134,7 +140,7 @@
                     Grid.Column="7"
                     Content="로그아웃" FontSize="16" 
                     Background="Gray"
-                    Foreground="White" Margin="5,10">
+                    Foreground="White" Margin="5,10" Click="BtnLogOut_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -149,7 +155,7 @@
 
         </Grid>
         <Grid Background="WhiteSmoke">
-            <ContentControl x:Name="ActiveControl"/> <!--화면전환--> 
+            <Frame x:Name="ActiveControl"/> <!--화면전환--> 
         </Grid>
     </DockPanel>
 </mah:MetroWindow>
