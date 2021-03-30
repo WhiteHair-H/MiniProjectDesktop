@@ -4,8 +4,8 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-          xmlns:local="clr-namespace:WpfSMSApp.View.User"
-          mc:Ignorable="d" 
+          xmlns:local="clr-namespace:WpfSMSApp.View.User" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    mc:Ignorable="d" 
           d:DesignHeight="630" d:DesignWidth="1200" Background="White"
           Title="UserList" Loaded="Page_Loaded">
 
@@ -50,21 +50,56 @@
                     FontSize="14"
                     Background="DarkSlateBlue" Foreground="White"
                     Content="사용자 추가" Height="50" Margin="5,10,5,5" Click="BtnAddUser_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20,0" VerticalAlignment="Center"/>
+                            <iconPacks:PackIconMaterial Kind="AccountMultiplePlus" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
             </Button>
+            
             <Button x:Name="BtnEditUser"
                     FontSize="14"
                     Background="DarkSlateBlue" Foreground="White"
                     Content="사용자 수정" Height="50" Margin="5,5" Click="BtnEditUser_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20,0" VerticalAlignment="Center"/>
+                            <iconPacks:PackIconMaterial Kind="AccountEditOutline" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+
             </Button>
             <Button x:Name="BtnDeactivateUser"
                     FontSize="14"
                     Background="DarkSlateBlue" Foreground="White"
                     Content="사용자비활성화" Height="50" Margin="5,5" Click="BtnDeactivateUser_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20,0" VerticalAlignment="Center"/>
+                            <iconPacks:PackIconVaadinIcons Kind="CloseBig" Width="20" Height="20"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+             
             </Button>
             <Button x:Name="BtnExportPdf"
                     FontSize="14"
                     Background="Silver" Foreground="Black"
                     Content="PDF익프포트" Height="50" Margin="5,5" Click="BtnExportPdf_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20,0" VerticalAlignment="Center"/>
+                            <iconPacks:PackIconMaterial Kind="FilePdfBoxOutline" Width="25" Height="25" Foreground="White"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
             </Button>
         </StackPanel>
         <!--버튼영역 끝-->
