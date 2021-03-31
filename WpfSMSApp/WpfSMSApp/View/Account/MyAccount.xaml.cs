@@ -34,8 +34,8 @@ namespace WpfSMSApp.View.Account
                 var user = Commons.LOGINED_USER;
                 TxtUserID.Text = user.UserID.ToString();
                 TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
-                TxtUserSurname.Text = user.UserSurname.ToString();
                 TxtUserName.Text = user.UserName.ToString();
+                TxtUserSurname.Text = user.UserSurname.ToString();
                 TxtUserEmail.Text = user.UserEmail.ToString();
                 TxtUserAdmin.Text = user.UserAdmin.ToString();
                 TxtUserActivated.Text = user.UserActivated.ToString();
