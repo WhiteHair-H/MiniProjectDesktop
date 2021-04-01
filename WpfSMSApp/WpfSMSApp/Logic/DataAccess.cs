@@ -26,7 +26,7 @@ namespace WpfSMSApp.Logic
         /// </summary>
         /// <param name="user"></param>
         /// <returns>0 또는 1이상</returns>
-        internal static int SetUser(User user)
+        public static int SetUser(User user)
         {
             using (var ctx = new SMSEntities())
             {
@@ -35,5 +35,38 @@ namespace WpfSMSApp.Logic
                 return ctx.SaveChanges();
             }
         }
+
+        public static List<Store> GetStores()
+        {
+            List<Store> stores;
+
+            using (var ctx = new SMSEntities())
+            {
+                stores = ctx.Store.ToList();
+            }
+
+            return stores;
+        }
+
+        public static List<Stock> GetStocks()
+        {
+            List<Stock> stocks;
+
+            using (var ctx = new SMSEntities())
+            {
+                stocks = ctx.Stock.ToList();
+            }
+
+            return stocks;
+        }
+        public static int SetStore(Store store)
+        {
+            using (var ctx = new SMSEntities())
+            {
+                ctx.Store.AddOrUpdate(store);
+                return ctx.SaveChanges();
+            }
+        }
+
     }
 }

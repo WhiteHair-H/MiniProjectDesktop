@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -25,9 +26,6 @@ namespace WpfSMSApp.View.User
             try
             {
                 RdoAll.IsChecked = true;
-
-
-
             }
             catch (Exception ex)
             {
@@ -41,13 +39,11 @@ namespace WpfSMSApp.View.User
             try
             {
                 NavigationService.Navigate(new AddUser());
-
             }
             catch (Exception ex)
             {
-                Commons.LOGGER.Error($"예외발생 BtnAddUser_Click Loaded : {ex}");
+                Commons.LOGGER.Error($"예외발생 BtnAddUser_Click : {ex}");
                 throw ex;
-
             }
         }
 
@@ -56,13 +52,11 @@ namespace WpfSMSApp.View.User
             try
             {
                 NavigationService.Navigate(new EditUser());
-
             }
             catch (Exception ex)
             {
-                Commons.LOGGER.Error($"예외발생 BtnEditUser_Click Loaded : {ex}");
+                Commons.LOGGER.Error($"예외발생 BtnEditUser_Click : {ex}");
                 throw ex;
-
             }
         }
 
@@ -71,13 +65,11 @@ namespace WpfSMSApp.View.User
             try
             {
                 NavigationService.Navigate(new DeActive());
-
             }
             catch (Exception ex)
             {
-                Commons.LOGGER.Error($"예외발생 BtnDeactivateUser_Click Loaded : {ex}");
+                Commons.LOGGER.Error($"예외발생 BtnDeactivateUser_Click : {ex}");
                 throw ex;
-
             }
         }
 
@@ -91,20 +83,76 @@ namespace WpfSMSApp.View.User
                 // PDF 변환
                 try
                 {
-                    iTextSharp.text.Font font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12);
+                    // 0. PDF 사용 폰트 설정
+                    string nanumPath = Path.Combine(Environment.CurrentDirectory, $"NanumGothic.ttf"); // 폰트경로
+                    BaseFont nanumBase = BaseFont.CreateFont(nanumPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                    var nanumTitle = new iTextSharp.text.Font(nanumBase, 20f); // 20 타이틀용 나눔폰트
+                    var nanumContent = new iTextSharp.text.Font(nanumBase, 12f); // 12 내용 나눔폰트
+
+                    // iTextSharp.text.Font font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12);
                     string pdfFilePath = saveDialog.FileName;
+
+                    // 1.PDF 생성
 
                     iTextSharp.text.Document pdfDoc = new Document(PageSize.A4);
 
-                    // 1.PDF 생성
-                    PdfPTable pdfTable = new PdfPTable(GrdData.Columns.Count);
+
 
                     // 2.PDF 내용 만들기
-                    string naumttf = Path.Combine(Environment.GetEnvironmentVariable("SystemRoot"), @"Fonts\NanumGothic.ttf");
-                    BaseFont nanumBase = BaseFont.CreateFont(naumttf, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-                    var nanumFont = new iTextSharp.text.Font(nanumBase, 16f);
+                    Paragraph title = new Paragraph("부경대 재고관리시스템(SMS)\n", nanumTitle);
+                    Paragraph subtitle = new Paragraph($"사용자리스트 exported : {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}\n\n", nanumContent);
 
-                    Paragraph title = new Paragraph($"PKNU Stock Management System : {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                    PdfPTable pdfTable = new PdfPTable(GrdData.Columns.Count);
+                    pdfTable.WidthPercentage = 100;
+
+                    // 그리드 헤더 작업
+                    foreach (DataGridColumn column in GrdData.Columns)
+                    {
+                        PdfPCell cell = new PdfPCell(new Phrase(column.Header.ToString(), nanumContent));
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        pdfTable.AddCell(cell);
+                    }
+
+                    // 각 셀 사이즈 조정
+                    float[] columnsWidth = new float[] { 7f, 15f, 10f, 15f, 27f, 12f, 10f };
+                    pdfTable.SetWidths(columnsWidth);
+
+                    // 그리드 Row 작업
+                    foreach (var item in GrdData.Items)
+                    {
+                        if (item is Model.User)
+                        {
+                            var temp = item as Model.User;
+                            // UserId
+                            PdfPCell cell = new PdfPCell(new Phrase(temp.UserID.ToString(), nanumContent));
+                            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                            pdfTable.AddCell(cell);
+                            // UserIdentityNumber
+                            cell = new PdfPCell(new Phrase(temp.UserIdentityNumber.ToString(), nanumContent));
+                            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            pdfTable.AddCell(cell);
+                            // UserSurName
+                            cell = new PdfPCell(new Phrase(temp.UserSurname.ToString(), nanumContent));
+                            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            pdfTable.AddCell(cell);
+                            // UserName
+                            cell = new PdfPCell(new Phrase(temp.UserName.ToString(), nanumContent));
+                            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            pdfTable.AddCell(cell);
+                            // UserEmail
+                            cell = new PdfPCell(new Phrase(temp.UserEmail.ToString(), nanumContent));
+                            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            pdfTable.AddCell(cell);
+                            // UserAdmin
+                            cell = new PdfPCell(new Phrase(temp.UserAdmin.ToString(), nanumContent));
+                            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            pdfTable.AddCell(cell);
+                            // UserActivated
+                            cell = new PdfPCell(new Phrase(temp.UserActivated.ToString(), nanumContent));
+                            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            pdfTable.AddCell(cell);
+                        }
+                    }
 
                     // 3.PDF 파일 생성
                     using (FileStream stream = new FileStream(pdfFilePath, FileMode.OpenOrCreate))
@@ -113,24 +161,28 @@ namespace WpfSMSApp.View.User
                         pdfDoc.Open();
                         // 2번에서 만든 내용 추가
                         pdfDoc.Add(title);
+                        pdfDoc.Add(subtitle);
+                        pdfDoc.Add(pdfTable);
                         pdfDoc.Close();
                         stream.Close(); // 안해도됨(선택)
-
                     }
+
+                    Commons.ShowMessageAsync("PDF변환", "PDF 익스포트 성공했습니다");
                 }
                 catch (Exception ex)
                 {
                     Commons.LOGGER.Error($"예외발생 BtnExportPdf_Click : {ex}");
                 }
             }
-        }
 
+        }
 
         private void RdoAll_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
-                List<Model.User> users = new List<Model.User>();
+                List<WpfSMSApp.Model.User> users = new List<Model.User>();
+
                 if (RdoAll.IsChecked == true)
                 {
                     users = Logic.DataAccess.GetUsers();
@@ -148,7 +200,8 @@ namespace WpfSMSApp.View.User
         {
             try
             {
-                List<Model.User> users = new List<Model.User>();
+                List<WpfSMSApp.Model.User> users = new List<Model.User>();
+
                 if (RdoActive.IsChecked == true)
                 {
                     users = Logic.DataAccess.GetUsers().Where(u => u.UserActivated == true).ToList();
@@ -166,7 +219,8 @@ namespace WpfSMSApp.View.User
         {
             try
             {
-                List<Model.User> users = new List<Model.User>();
+                List<WpfSMSApp.Model.User> users = new List<Model.User>();
+
                 if (RdoDeactive.IsChecked == true)
                 {
                     users = Logic.DataAccess.GetUsers().Where(u => u.UserActivated == false).ToList();

@@ -34,8 +34,8 @@ namespace WpfSMSApp.View.Account
                 var user = Commons.LOGINED_USER;
                 TxtUserID.Text = user.UserID.ToString();
                 TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
-                TxtUserName.Text = user.UserName.ToString();
                 TxtUserSurname.Text = user.UserSurname.ToString();
+                TxtUserName.Text = user.UserName.ToString();
                 TxtUserEmail.Text = user.UserEmail.ToString();
                 TxtUserAdmin.Text = user.UserAdmin.ToString();
                 TxtUserActivated.Text = user.UserActivated.ToString();
@@ -49,8 +49,7 @@ namespace WpfSMSApp.View.Account
 
         private void BtnEditMyAccount_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditAccount());
-
+            NavigationService.Navigate(new EditAccount()); // 계정정보 수정 화면으로 변경
         }
     }
 }
