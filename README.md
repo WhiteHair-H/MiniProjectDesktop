@@ -20,7 +20,7 @@
 --------------------------
 
 
-![MoviePalyer1](https://github.com/WhiteHair-H/MiniProjectDesktop/blob/main/WpfMiniProject/NaverMovieFinderApp/Player/MiniProject1.gif){: .align-center}
+![MoviePalyer1](https://github.com/WhiteHair-H/MiniProjectDesktop/blob/main/WpfMiniProject/NaverMovieFinderApp/Player/MiniProject1.gif){:align-center}
 
 --------------------------
 
