@@ -339,6 +339,9 @@ namespace NaverMovieFinderApp
 
         private void BtnNaverMovieLink_Click(object sender, RoutedEventArgs e)
         {
+
+
+
             if (GrdData.SelectedItems.Count == 0)
             {
                 Commons.showMessageAsync("네이버영화", "영화를 선택하세요");

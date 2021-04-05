@@ -212,6 +212,8 @@
       <DependentUpon>FavoriteMovieModel.edmx</DependentUpon>
       <LastGenOutput>FavoriteMovieModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Player\MiniProject1.gif" />
+    <Resource Include="Player\MiniProject2.gif" />
     <Content Include="Sql\OpenAPI.sql" />
   </ItemGroup>
   <ItemGroup>
