@@ -20,4 +20,7 @@
 --------------------------
 
 
-![MoviePalyer](https://github.com/WhiteHair-H/MiniProjectDesktop/blob/main/WpfMiniProject/NaverMovieFinderApp/Player/MiniProject1.gif "MoviePalyer")
+![MoviePalyer1](https://github.com/WhiteHair-H/MiniProjectDesktop/blob/main/WpfMiniProject/NaverMovieFinderApp/Player/MiniProject1.gif "MoviePalyer1")
+--------------------------
+
+![MoviePalyer2](https://github.com/WhiteHair-H/MiniProjectDesktop/blob/main/WpfMiniProject/NaverMovieFinderApp/Player/MiniProject2.gif "MoviePalyer2")
