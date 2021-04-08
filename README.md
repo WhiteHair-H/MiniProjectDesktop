@@ -16,9 +16,12 @@
 
 ![WhiteHair-H GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&theme=kacho_ga&show_icons=true)
 
-
 --------------------------
 
+### Youtube&NaverAPI
+#### 네이버&유튜브 API 활용
+##### 순서
+- 
 
 ![MoviePalyer1](https://github.com/WhiteHair-H/MiniProjectDesktop/blob/main/WpfMiniProject/NaverMovieFinderApp/Player/MiniProject1.gif "MoviePalyer1")
 
