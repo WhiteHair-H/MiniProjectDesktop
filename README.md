@@ -7,7 +7,7 @@
 
 ## 🏳Contents
 - [ERP재고관리](#ERP재고관리)
-- [Youtube&NaverAPI](#Youtube&NaverAPI)
+- [YoutubeAndNaverAPI](#YoutubeAndNaverAPI)
 
 ## ⏰기간
 - [2021-03-19] ~ [2021-04-]
@@ -18,7 +18,7 @@
 
 --------------------------
 
-## Youtube&NaverAPI
+## YoutubeAndNaverAPI
 ### 순서
 1. 검색
 2. 즐겨찾기추가(복수가능)
